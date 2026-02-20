@@ -1,7 +1,9 @@
 import * as THREE from "three";
 
-// 1. Scena i Kamera
-const scene = new THREE.Scene();
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
 const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
@@ -10,38 +12,13 @@ const camera = new THREE.PerspectiveCamera(
 );
 camera.position.z = 5;
 
-// 2. Renderer (ono što crta na ekranu)
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const light = new THREE.AmbientLight(0xffffff); // soft white light
+scene.add(light);
 
-// 3. Kocka (Geometry + Material = Mesh)
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+const geometry = new THREE.BoxGeometry();
+const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 
-// 4. Svetlo (da bismo videli boju kocke)
-const light = new THREE.DirectionalLight(0xffffff, 1);
-light.position.set(1, 1, 2);
-scene.add(light);
-
-// 5. Animaciona petlja
-function animate() {
-  requestAnimationFrame(animate);
-
-  // Rotacija kocke
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
-
-  renderer.render(scene, camera);
-}
-
-animate();
-
-// Bonus: Resizing prozora
-window.addEventListener("resize", () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-});
+renderer.render(scene, camera);
