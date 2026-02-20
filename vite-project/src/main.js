@@ -21,7 +21,7 @@ const light = new THREE.AmbientLight(0xffffff); // soft white light
 scene.add(light);
 
 const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshBasicMaterial({ color: 0x00ffff });
+const material = new THREE.MeshBasicMaterial({ color: 0xff00ff });
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 
@@ -42,3 +42,21 @@ window.addEventListener("resize", () => {
 });
 
 animate();
+
+class App {
+  #camera;
+  #scene;
+  #renderer;
+  constructor() {
+    console.log("App initialized");
+  }
+  Initialize() {
+    console.log("App initialized");
+    this.#camera = camera;
+    this.#scene = scene;
+    this.#renderer = renderer;
+  }
+}
+
+let app = new App();
+app.Initialize();
