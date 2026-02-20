@@ -14,7 +14,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   1000,
 );
-camera.position.z = 8;
+camera.position.z = 5;
 
 const scene = new THREE.Scene();
 const light = new THREE.AmbientLight(0xffffff); // soft white light
@@ -24,16 +24,14 @@ const geometry = new THREE.BoxGeometry();
 const material = new THREE.MeshBasicMaterial({ color: 0x00ffff });
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
+
 let controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.update();
 
 function animate() {
   requestAnimationFrame(animate);
-  controls.enableDamping = true;
-
-  controls.update();
-
   cube.rotation.x += 0.01;
-
   renderer.render(scene, camera);
 }
 
@@ -44,5 +42,3 @@ window.addEventListener("resize", () => {
 });
 
 animate();
-
-renderer.render(scene, camera);
