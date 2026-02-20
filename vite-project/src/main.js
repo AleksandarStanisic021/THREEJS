@@ -1,6 +1,8 @@
 import * as THREE from "three";
 
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({
+  antialias: true,
+});
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
@@ -10,7 +12,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   1000,
 );
-camera.position.z = 5;
+camera.position.z = 8;
 
 const scene = new THREE.Scene();
 const light = new THREE.AmbientLight(0xffffff); // soft white light
