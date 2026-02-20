@@ -1,4 +1,6 @@
 import * as THREE from "three";
+import "./style.css";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 const renderer = new THREE.WebGLRenderer({
   antialias: true,
@@ -22,12 +24,15 @@ const geometry = new THREE.BoxGeometry();
 const material = new THREE.MeshBasicMaterial({ color: 0x00ffff });
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
+let controls = new OrbitControls(camera, renderer.domElement);
 
 function animate() {
   requestAnimationFrame(animate);
+  controls.enableDamping = true;
+
+  controls.update();
 
   cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
 
   renderer.render(scene, camera);
 }
