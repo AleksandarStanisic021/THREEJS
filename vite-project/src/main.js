@@ -2,10 +2,12 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 const threejs = new THREE.WebGLRenderer({ antialias: true });
-threejs.setSize(400, 400);
+threejs.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(threejs.domElement);
 
-const camera = new THREE.PerspectiveCamera();
+const aspect = window.innerWidth / window.innerHeight;
+const camera = new THREE.PerspectiveCamera(50, aspect, 0.1, 2000);
+
 camera.position.z = 5;
 
 const controls = new OrbitControls(camera, threejs.domElement);
